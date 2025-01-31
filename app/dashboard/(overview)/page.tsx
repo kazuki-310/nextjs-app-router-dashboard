@@ -1,9 +1,8 @@
 import { CardsSkeleton, InvoiceSkeleton, RevenueChartSkeleton } from '@/app/_components/skeletons';
 import { Suspense } from 'react';
-import CardWrapper, { Card } from '../../_components/dashboard/cards';
+import CardWrapper from '../../_components/dashboard/cards';
 import LatestInvoices from '../../_components/dashboard/latest-invoices';
 import RevenueChart from '../../_components/dashboard/revenue-chart';
-import { fetchCardData, fetchLatestInvoices, fetchRevenue } from '../../_lib/data';
 
 export default async function Page() {
 	return (
