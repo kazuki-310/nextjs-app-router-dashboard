@@ -1,6 +1,5 @@
 import Search from '@/app/_components/search';
 import { CustomersTableType, type FormattedCustomersTable } from '@/app/_lib/definitions';
-import { lusitana } from '@/app/ui/fonts';
 import Image from 'next/image';
 
 export default async function CustomersTable({
@@ -10,7 +9,7 @@ export default async function CustomersTable({
 }) {
 	return (
 		<div className='w-full'>
-			<h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>Customers</h1>
+			<h1 className='mb-8 text-xl md:text-2xl'>Customers</h1>
 			<Search placeholder='Search customers...' />
 			<div className='mt-6 flow-root'>
 				<div className='overflow-x-auto'>

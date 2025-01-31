@@ -1,8 +1,7 @@
 import type React from 'react';
 import './global.css';
-import { Inter } from 'next/font/google';
 
-export const inter = Inter({ subsets: ['latin'] });
+import { inter } from './_components/fonts';
 
 export default function RootLayout({
 	children,
