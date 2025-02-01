@@ -1,6 +1,6 @@
-import Search from '@/app/_components/search';
 import { CustomersTableType, type FormattedCustomersTable } from '@/app/_lib/definitions';
 import Image from 'next/image';
+import { Search } from '../search';
 
 export default async function CustomersTable({
 	customers,
