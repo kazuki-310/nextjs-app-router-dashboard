@@ -86,6 +86,8 @@ app
 ```
 
 ### リファクタリング
+
+- nuqs 使う
 - Prisma 使う
 - container / presentation に分ける
 - テストを書く
