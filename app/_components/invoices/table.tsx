@@ -1,14 +1,16 @@
-import { DeleteInvoice, UpdateInvoice } from '@/app/_components/invoices/buttons';
 import InvoiceStatus from '@/app/_components/invoices/status';
 import { fetchFilteredInvoices } from '@/app/_lib/data';
 import { formatCurrency, formatDateToLocal } from '@/app/_lib/utils';
-import { searchParamsCache } from '@/app/dashboard/invoices/page';
 import Image from 'next/image';
 
-export default async function InvoicesTable() {
-	const { query, page } = searchParamsCache.all();
-
-	const invoices = await fetchFilteredInvoices(query, page);
+export default async function InvoicesTable({
+	query,
+	currentPage,
+}: {
+	query: string;
+	currentPage: number;
+}) {
+	const invoices = await fetchFilteredInvoices(query, currentPage);
 
 	return (
 		<div className='mt-6 flow-root'>

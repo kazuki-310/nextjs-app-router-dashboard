@@ -1,3 +1,4 @@
+import FetchInvoicePage from '@/app/_components/FetchInvoicePage';
 import { CreateInvoice } from '@/app/_components/invoices/buttons';
 import Pagination from '@/app/_components/invoices/pagination';
 import InvoicesTable from '@/app/_components/invoices/table';
@@ -7,18 +8,15 @@ import { fetchInvoicesPages } from '@/app/_lib/data';
 import { createSearchParamsCache, parseAsInteger, parseAsString } from 'nuqs/server';
 import { Suspense } from 'react';
 
-export const searchParamsCache = createSearchParamsCache({
-	query: parseAsString.withDefault(''),
-	page: parseAsInteger.withDefault(1),
-});
-
-export default async function Page({
-	searchParams,
-}: {
-	searchParams?: Promise<Record<string, string | string[] | undefined>>;
+export default async function Page(props: {
+	searchParams?: Promise<{
+		query?: string;
+		page?: string;
+	}>;
 }) {
-	const searchParmsPromise = await searchParams;
-	const { query, page } = searchParamsCache.parse(searchParmsPromise ?? {});
+	const searchParams = await props.searchParams;
+	const query = searchParams?.query || '';
+	const currentPage = Number(searchParams?.page) || 1;
 
 	const totalPages = await fetchInvoicesPages(query);
 
@@ -34,8 +32,8 @@ export default async function Page({
 			</div>
 
 			{/* NOTE: Suspense に key を渡すことで異なる場合再レンダリングさせる。 */}
-			<Suspense key={query + page} fallback={<InvoicesTableSkeleton />}>
-				<InvoicesTable />
+			<Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
+				<InvoicesTable query={query} currentPage={currentPage} />
 			</Suspense>
 
 			<div className='mt-5 flex w-full justify-center'>

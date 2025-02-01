@@ -4,8 +4,7 @@ import { generatePagination } from '@/app/_lib/utils';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { parseAsInteger, parseAsString, useQueryStates } from 'nuqs';
+import { createSerializer, parseAsInteger, parseAsString, useQueryStates } from 'nuqs';
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
 	const [search] = useQueryStates(
@@ -15,16 +14,19 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
 		},
 		{ shallow: false },
 	);
+
 	const currentPage = search.page;
-	const pathname = usePathname();
+
+	const serializer = createSerializer({
+		query: parseAsString,
+		page: parseAsInteger,
+	});
 
 	const createPageURL = (pageNumber: number | string): string => {
-		const params = new URLSearchParams({
+		return serializer({
 			query: search.query,
-			page: pageNumber.toString(),
+			page: Number(pageNumber),
 		});
-
-		return `${pathname}?${params.toString()}`;
 	};
 
 	const allPages = generatePagination(currentPage, totalPages);
