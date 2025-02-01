@@ -28,6 +28,7 @@ export default async function Page(props: {
 				<CreateInvoice />
 			</div>
 
+			{/* NOTE: Suspense に key を渡すことで異なる場合再レンダリングさせる。 */}
 			<Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
 				<InvoicesTable query={query} currentPage={currentPage} />
 			</Suspense>
