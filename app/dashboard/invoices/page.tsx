@@ -4,17 +4,21 @@ import InvoicesTable from '@/app/_components/invoices/table';
 import { Search } from '@/app/_components/search';
 import { InvoicesTableSkeleton } from '@/app/_components/skeletons';
 import { fetchInvoicesPages } from '@/app/_lib/data';
+import { createSearchParamsCache, parseAsInteger, parseAsString } from 'nuqs/server';
 import { Suspense } from 'react';
 
-export default async function Page(props: {
-	searchParams?: Promise<{
-		query?: string;
-		page?: string;
-	}>;
+export const searchParamsCache = createSearchParamsCache({
+	query: parseAsString.withDefault(''),
+	page: parseAsInteger.withDefault(1),
+});
+
+export default async function Page({
+	searchParams,
+}: {
+	searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
-	const searchParams = await props.searchParams;
-	const query = searchParams?.query || '';
-	const currentPage = Number(searchParams?.page) || 1;
+	const searchParmsPromise = await searchParams;
+	const { query, page } = searchParamsCache.parse(searchParmsPromise ?? {});
 
 	const totalPages = await fetchInvoicesPages(query);
 
@@ -23,14 +27,15 @@ export default async function Page(props: {
 			<div className='flex w-full items-center justify-between'>
 				<h1 className='text-2xl'>Invoices</h1>
 			</div>
+
 			<div className='mt-4 flex items-center justify-between gap-2 md:mt-8'>
 				<Search placeholder='Search invoices...' />
 				<CreateInvoice />
 			</div>
 
 			{/* NOTE: Suspense に key を渡すことで異なる場合再レンダリングさせる。 */}
-			<Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
-				<InvoicesTable query={query} currentPage={currentPage} />
+			<Suspense key={query + page} fallback={<InvoicesTableSkeleton />}>
+				<InvoicesTable />
 			</Suspense>
 
 			<div className='mt-5 flex w-full justify-center'>

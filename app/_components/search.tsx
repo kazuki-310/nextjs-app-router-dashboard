@@ -3,15 +3,24 @@
 import type React from 'react';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { useQueryState } from 'nuqs';
+import { parseAsInteger, parseAsString, useQueryStates } from 'nuqs';
 
 export function Search({ placeholder }: { placeholder: string }) {
-	const [query, setQuery] = useQueryState('query', { shallow: false, throttleMs: 500 });
-	const [_, setPage] = useQueryState('page');
+	const [searchParams, setSearchParams] = useQueryStates(
+		{
+			query: parseAsString.withDefault(''),
+			page: parseAsInteger.withDefault(1),
+		},
+		{ shallow: false, throttleMs: 1000 },
+	);
+
+	const { query } = searchParams;
 
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setPage('1');
-		setQuery(e.target.value);
+		setSearchParams({
+			query: e.target.value,
+			page: 1,
+		});
 	};
 
 	return (

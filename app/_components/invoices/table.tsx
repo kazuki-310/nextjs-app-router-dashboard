@@ -2,16 +2,13 @@ import { DeleteInvoice, UpdateInvoice } from '@/app/_components/invoices/buttons
 import InvoiceStatus from '@/app/_components/invoices/status';
 import { fetchFilteredInvoices } from '@/app/_lib/data';
 import { formatCurrency, formatDateToLocal } from '@/app/_lib/utils';
+import { searchParamsCache } from '@/app/dashboard/invoices/page';
 import Image from 'next/image';
 
-export default async function InvoicesTable({
-	query,
-	currentPage,
-}: {
-	query: string;
-	currentPage: number;
-}) {
-	const invoices = await fetchFilteredInvoices(query, currentPage);
+export default async function InvoicesTable() {
+	const { query, page } = searchParamsCache.all();
+
+	const invoices = await fetchFilteredInvoices(query, page);
 
 	return (
 		<div className='mt-6 flow-root'>
@@ -98,8 +95,8 @@ export default async function InvoicesTable({
 									</td>
 									<td className='whitespace-nowrap py-3 pl-6 pr-3'>
 										<div className='flex justify-end gap-3'>
-											<UpdateInvoice id={invoice.id} />
-											<DeleteInvoice id={invoice.id} />
+											{/* <UpdateInvoice id={invoice.id} />
+											<DeleteInvoice id={invoice.id} /> */}
 										</div>
 									</td>
 								</tr>
