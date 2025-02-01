@@ -85,6 +85,11 @@ app
 └── ...
 ```
 
+### リファクタリング
+- Prisma 使う
+- container / presentation に分ける
+- テストを書く
+
 ### 参考資料
 
 - [Learn Next.js](https://nextjs.org/learn)
