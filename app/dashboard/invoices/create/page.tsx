@@ -1,6 +1,7 @@
 import { Breadcrumbs } from '@/app/_components/invoices/breadcrumbs';
-import { CreateForm } from '@/app/_components/invoices/create-form';
+import { Form } from '@/app/_components/invoices/invoice-form';
 import { fetchCustomers } from '@/app/_lib/data';
+import { createInvoice } from '@/app/_lib/invoice-form-action';
 
 export default async function Page() {
 	const customers = await fetchCustomers();
@@ -18,7 +19,7 @@ export default async function Page() {
 				]}
 			/>
 
-			<CreateForm customers={customers} />
+			<Form mode='create' customers={customers} onSubmitAction={createInvoice} cancelHref='/dashboard/invoices' />
 		</main>
 	);
 }

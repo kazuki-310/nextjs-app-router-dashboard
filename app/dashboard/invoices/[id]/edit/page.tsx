@@ -1,6 +1,7 @@
 import { Breadcrumbs } from '@/app/_components/invoices/breadcrumbs';
-import EditInvoiceForm from '@/app/_components/invoices/edit-form';
+import { Form } from '@/app/_components/invoices/invoice-form';
 import { fetchCustomers, fetchInvoiceById } from '@/app/_lib/data';
+import { updateInvoice } from '@/app/_lib/invoice-form-action';
 import { notFound } from 'next/navigation';
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {
@@ -8,6 +9,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 	const id = params.id;
 
 	const [invoice, customers] = await Promise.all([fetchInvoiceById(id), fetchCustomers()]);
+	const updateInvoiceWithId = updateInvoice.bind(null, invoice.id);
 
 	if (!invoice) {
 		notFound();
@@ -26,7 +28,13 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 				]}
 			/>
 
-			<EditInvoiceForm invoice={invoice} customers={customers} />
+			<Form
+				mode='edit'
+				invoice={invoice}
+				customers={customers}
+				onSubmitAction={updateInvoiceWithId}
+				cancelHref='/dashboard/invoices'
+			/>
 		</main>
 	);
 }
