@@ -1,6 +1,6 @@
 import { fetchCustomers } from '@/app/_lib/data';
 
-export async function CustomerSelect() {
+export async function CustomerSelect({ customerId }: { customerId?: string }) {
 	const customers = await fetchCustomers();
 
 	return (
@@ -8,7 +8,7 @@ export async function CustomerSelect() {
 			id='customer'
 			name='customerId'
 			className='peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500'
-			defaultValue=''
+			defaultValue={customerId || ''}
 		>
 			<option value='' disabled>
 				Select a customer
