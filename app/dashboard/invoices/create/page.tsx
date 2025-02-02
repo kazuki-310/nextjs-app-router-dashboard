@@ -1,5 +1,5 @@
 import { Breadcrumbs } from '@/app/_components/invoices/breadcrumbs';
-import { Form } from '@/app/_components/invoices/invoice-form';
+import { Form } from '@/app/_components/invoices/form';
 import { fetchCustomers } from '@/app/_lib/data';
 import { createInvoice } from '@/app/_lib/invoice-form-action';
 

@@ -2,21 +2,26 @@
 
 import { Button } from '@/app/_components/button';
 import type { CustomerField, InvoiceForm, InvoiceStatusType } from '@/app/_lib/definitions';
-import { type State, updateInvoice } from '@/app/_lib/invoice-form-action';
+import type { State } from '@/app/_lib/invoice-form-action';
 import { CheckIcon, ClockIcon, CurrencyDollarIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useActionState } from 'react';
 
-export default function EditInvoiceForm({
-	invoice,
-	customers,
-}: {
-	invoice: InvoiceForm;
+type FormProps = {
+	mode: 'create' | 'edit';
+	invoice?: InvoiceForm;
 	customers: CustomerField[];
-}) {
+	onSubmitAction: (state: State, formData: FormData) => Promise<State>;
+	cancelHref: string;
+};
+
+export function Form({ mode, invoice, customers, onSubmitAction, cancelHref }: FormProps) {
 	const initialState: State = { message: null, errors: {} };
-	const updateInvoiceWithId = updateInvoice.bind(null, invoice.id);
-	const [state, formAction] = useActionState(updateInvoiceWithId, initialState);
+	const [state, formAction, isPending] = useActionState(onSubmitAction, initialState);
+
+	const defaultCustomerId = invoice?.customer_id ?? '';
+	const defaultAmount = invoice?.amount;
+	const defaultStatus = invoice?.status ?? 'pending';
 
 	return (
 		<form action={formAction}>
@@ -26,7 +31,7 @@ export default function EditInvoiceForm({
 						Choose customer
 					</label>
 					<div className='relative'>
-						<CustomerSelect customerId={invoice.customer_id} customers={customers} />
+						<CustomerSelect customerId={defaultCustomerId} customers={customers} />
 
 						<UserCircleIcon className='pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500' />
 					</div>
@@ -40,7 +45,7 @@ export default function EditInvoiceForm({
 					))}
 				</div>
 
-				<InvoiceAmount amount={invoice.amount} />
+				<InvoiceAmount amount={defaultAmount} />
 
 				<div id='amount-error' aria-live='polite' aria-atomic='true'>
 					{state.errors?.amount?.map((error: string) => (
@@ -50,10 +55,10 @@ export default function EditInvoiceForm({
 					))}
 				</div>
 
-				<InvoiceStatus status={invoice.status} />
+				<InvoiceStatus status={defaultStatus} />
 
 				<div id='status-error' aria-live='polite' aria-atomic='true'>
-					{state.errors?.amount?.map((error: string) => (
+					{state.errors?.status?.map((error: string) => (
 						<p className='mt-2 text-sm text-red-500' key={error}>
 							{error}
 						</p>
@@ -63,12 +68,15 @@ export default function EditInvoiceForm({
 
 			<div className='mt-6 flex justify-end gap-4'>
 				<Link
-					href='/dashboard/invoices'
+					href={cancelHref}
 					className='flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200'
 				>
 					Cancel
 				</Link>
-				<Button type='submit'>Edit Invoice</Button>
+
+				<Button type='submit' aria-disabled={isPending}>
+					{isPending ? 'Loading...' : mode === 'edit' ? 'Edit Invoice' : 'Create Invoice'}
+				</Button>
 			</div>
 		</form>
 	);
