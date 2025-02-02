@@ -1,7 +1,10 @@
 import { Breadcrumbs } from '@/app/_components/invoices/breadcrumbs';
 import { CreateForm } from '@/app/_components/invoices/create-form';
+import { fetchCustomers } from '@/app/_lib/data';
 
 export default async function Page() {
+	const customers = await fetchCustomers();
+
 	return (
 		<main>
 			<Breadcrumbs
@@ -15,7 +18,7 @@ export default async function Page() {
 				]}
 			/>
 
-			<CreateForm />
+			<CreateForm customers={customers} />
 		</main>
 	);
 }
