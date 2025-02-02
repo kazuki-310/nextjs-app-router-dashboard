@@ -1,3 +1,13 @@
 export default function Page() {
-	return <p>Dashboard Page</p>;
+	const create = async () => {
+		'use server';
+		console.log('Creating invoice...');
+	};
+
+	return (
+		<form action={create}>
+			<input type='text' />
+			<button type='submit'>button</button>
+		</form>
+	);
 }
