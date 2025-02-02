@@ -1,10 +1,15 @@
 import { CreateInvoice } from '@/app/_components/invoices/buttons';
-import Pagination from '@/app/_components/invoices/pagination';
 import InvoicesTable from '@/app/_components/invoices/invoice-table';
+import Pagination from '@/app/_components/invoices/pagination';
 import { Search } from '@/app/_components/search';
 import { InvoicesTableSkeleton } from '@/app/_components/skeletons';
 import { fetchInvoicesPages } from '@/app/_lib/data';
+import type { Metadata } from 'next';
 import { Suspense } from 'react';
+
+export const metadata: Metadata = {
+	title: 'Invoices',
+};
 
 export default async function Page(props: {
 	searchParams?: Promise<{
