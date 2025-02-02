@@ -1,5 +1,5 @@
 import { Button } from '@/app/_components/button';
-import { createInvoice } from '@/app/_lib/action';
+import { createInvoice } from '@/app/_lib/invoice-form-action';
 import Link from 'next/link';
 import { CustomerName } from './customer-name';
 import { InvoiceAmount } from './invoice-amount';

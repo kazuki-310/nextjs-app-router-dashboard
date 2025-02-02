@@ -1,10 +1,10 @@
 import { Button } from '@/app/_components/button';
 import type { InvoiceForm } from '@/app/_lib/definitions';
+import { updateInvoice } from '@/app/_lib/invoice-form-action';
 import Link from 'next/link';
 import { CustomerName } from './customer-name';
 import { InvoiceAmount } from './invoice-amount';
 import { InvoiceStatus } from './invoice-status';
-import { updateInvoice } from '@/app/_lib/action';
 
 export default function EditInvoiceForm({
 	invoice,
