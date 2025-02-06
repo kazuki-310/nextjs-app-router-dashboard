@@ -1,6 +1,4 @@
-// This file contains placeholder data that you'll be replacing with real data in the Data Fetching chapter:
-// https://nextjs.org/learn/dashboard-app/fetching-data
-const users = [
+export const users = [
 	{
 		id: '410544b2-4001-4271-9855-fec4b6a6442a',
 		name: 'User',
@@ -9,7 +7,7 @@ const users = [
 	},
 ];
 
-const customers = [
+export const customers = [
 	{
 		id: 'd6e15727-9fe1-4961-8c5b-ea44a9bd81aa',
 		name: 'Evil Rabbit',
@@ -35,101 +33,72 @@ const customers = [
 		image_url: '/customers/michael-novotny.png',
 	},
 	{
-		id: 'CC27C14A-0ACF-4F4A-A6C9-D45682C144B9',
+		id: 'cc27c14a-0acf-4f4a-a6c9-d45682c144b9',
 		name: 'Amy Burns',
 		email: 'amy@burns.com',
 		image_url: '/customers/amy-burns.png',
 	},
 	{
-		id: '13D07535-C59E-4157-A011-F8D2EF4E0CBB',
+		id: '13d07535-c59e-4157-a011-f8d2ef4e0cbb',
 		name: 'Balazs Orban',
 		email: 'balazs@orban.com',
 		image_url: '/customers/balazs-orban.png',
 	},
 ];
 
-const invoices = [
+export const invoices = [
 	{
+		id: '3958dc9e-784f-4377-85e9-fec4b6a6442a',
 		customer_id: customers[0].id,
 		amount: 15795,
 		status: 'pending',
-		date: '2022-12-06',
+		date: new Date('2022-12-06'),
 	},
 	{
+		id: '3958dc9e-798f-4377-85e9-fec4b6a6442a',
 		customer_id: customers[1].id,
 		amount: 20348,
 		status: 'pending',
-		date: '2022-11-14',
+		date: new Date('2022-11-14'),
 	},
 	{
+		id: '3958dc9e-737f-4377-85e9-fec4b6a6442a',
 		customer_id: customers[4].id,
 		amount: 3040,
 		status: 'paid',
-		date: '2022-10-29',
+		date: new Date('2022-10-29'),
 	},
 	{
+		id: '76d65c26-784f-44a2-ac19-586678f7c2f2',
 		customer_id: customers[3].id,
 		amount: 44800,
 		status: 'paid',
-		date: '2023-09-10',
+		date: new Date('2023-09-10'),
 	},
 	{
+		id: 'cc27c14a-784f-4f4a-a6c9-d45682c144b9',
 		customer_id: customers[5].id,
 		amount: 34577,
 		status: 'pending',
-		date: '2023-08-05',
+		date: new Date('2023-08-05'),
 	},
 	{
+		id: '13d07535-784f-4157-a011-f8d2ef4e0cbb',
 		customer_id: customers[2].id,
 		amount: 54246,
 		status: 'pending',
-		date: '2023-07-16',
+		date: new Date('2023-07-16'),
 	},
 	{
+		id: '410544b2-784f-4271-9855-fec4b6a6442a',
 		customer_id: customers[0].id,
 		amount: 666,
 		status: 'pending',
-		date: '2023-06-27',
-	},
-	{
-		customer_id: customers[3].id,
-		amount: 32545,
-		status: 'paid',
-		date: '2023-06-09',
-	},
-	{
-		customer_id: customers[4].id,
-		amount: 1250,
-		status: 'paid',
-		date: '2023-06-17',
-	},
-	{
-		customer_id: customers[5].id,
-		amount: 8546,
-		status: 'paid',
-		date: '2023-06-07',
-	},
-	{
-		customer_id: customers[1].id,
-		amount: 500,
-		status: 'paid',
-		date: '2023-08-19',
-	},
-	{
-		customer_id: customers[5].id,
-		amount: 8945,
-		status: 'paid',
-		date: '2023-06-03',
-	},
-	{
-		customer_id: customers[2].id,
-		amount: 1000,
-		status: 'paid',
-		date: '2022-06-05',
+		date: new Date('2023-06-27'),
 	},
 ];
 
-const revenue = [
+export const revenue = [
 	{ month: 'Jan', revenue: 2000 },
 	{ month: 'Feb', revenue: 1800 },
 	{ month: 'Mar', revenue: 2200 },
@@ -143,5 +112,3 @@ const revenue = [
 	{ month: 'Nov', revenue: 3000 },
 	{ month: 'Dec', revenue: 4800 },
 ];
-
-export { users, customers, invoices, revenue };
