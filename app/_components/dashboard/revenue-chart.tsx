@@ -1,5 +1,3 @@
-// import { fetchRevenue } from '@/app/_lib/data';
-import type { Revenue } from '@/app/_lib/definitions';
 import { generateYAxis } from '@/app/_lib/utils';
 import { CalendarIcon } from '@heroicons/react/24/outline';
 import { fetchRevenue } from './fetch-revenue';

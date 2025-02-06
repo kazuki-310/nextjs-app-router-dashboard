@@ -1,33 +1,6 @@
 import { sql } from '@vercel/postgres';
-import type {
-	CustomerField,
-	CustomersTableType,
-	InvoiceForm,
-	InvoicesTable,
-	LatestInvoiceRaw,
-	Revenue,
-} from './definitions';
+import type { CustomerField, CustomersTableType, InvoiceForm, InvoicesTable } from './definitions';
 import { formatCurrency } from './utils';
-
-export async function fetchLatestInvoices() {
-	try {
-		const data = await sql<LatestInvoiceRaw>`
-      SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
-      FROM invoices
-      JOIN customers ON invoices.customer_id = customers.id
-      ORDER BY invoices.date DESC
-      LIMIT 5`;
-
-		const latestInvoices = data.rows.map((invoice) => ({
-			...invoice,
-			amount: formatCurrency(invoice.amount),
-		}));
-		return latestInvoices;
-	} catch (error) {
-		console.error('Database Error:', error);
-		throw new Error('Failed to fetch the latest invoices.');
-	}
-}
 
 const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredInvoices(query: string, currentPage: number) {
