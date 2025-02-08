@@ -1,6 +1,16 @@
+<<<<<<< HEAD
+=======
+import { fetchRevenue } from '@/app/_lib/data';
+import type { Revenue } from '@/app/_lib/definitions';
+>>>>>>> parent of 3450cc9 (refactor: fetchRevenue 関数を prisma 使って対応)
 import { generateYAxis } from '@/app/_lib/utils';
 import { CalendarIcon } from '@heroicons/react/24/outline';
-import { fetchRevenue } from './fetch-revenue';
+
+// This component is representational only.
+// For data visualization UI, check out:
+// https://www.tremor.so/
+// https://www.chartjs.org/
+// https://airbnb.io/visx/
 
 export default async function RevenueChart() {
 	const revenue = await fetchRevenue();

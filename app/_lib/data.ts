@@ -3,7 +3,10 @@ import type { CustomerField, CustomersTableType, InvoiceForm, InvoicesTable } fr
 import { formatCurrency } from './utils';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 3450cc9 (refactor: fetchRevenue 関数を prisma 使って対応)
 export async function fetchRevenue() {
 	try {
 		console.log('Fetching revenue data...');
