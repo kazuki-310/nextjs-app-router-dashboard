@@ -1,8 +1,13 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { fetchRevenue } from '@/app/_lib/data';
 import type { Revenue } from '@/app/_lib/definitions';
 >>>>>>> parent of 3450cc9 (refactor: fetchRevenue 関数を prisma 使って対応)
+=======
+// import { fetchRevenue } from '@/app/_lib/data';
+import type { Revenue } from '@/app/_lib/definitions';
+>>>>>>> parent of fc73c9b (refactor: fetchLatestInvoices 関数を prisma を使用して実装し、関連するコンポーネントを更新)
 import { generateYAxis } from '@/app/_lib/utils';
 import { CalendarIcon } from '@heroicons/react/24/outline';
 

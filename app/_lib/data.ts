@@ -1,12 +1,14 @@
 import { sql } from '@vercel/postgres';
-import type { CustomerField, CustomersTableType, InvoiceForm, InvoicesTable } from './definitions';
+import type {
+	CustomerField,
+	CustomersTableType,
+	InvoiceForm,
+	InvoicesTable,
+	LatestInvoiceRaw,
+	Revenue,
+} from './definitions';
 import { formatCurrency } from './utils';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 3450cc9 (refactor: fetchRevenue 関数を prisma 使って対応)
 export async function fetchRevenue() {
 	try {
 		console.log('Fetching revenue data...');
@@ -74,7 +76,6 @@ export async function fetchCardData() {
 	}
 }
 
->>>>>>> parent of 69614e8 (refactor: fetchCardData 関数を prisma 使って取得)
 const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredInvoices(query: string, currentPage: number) {
 	const offset = (currentPage - 1) * ITEMS_PER_PAGE;

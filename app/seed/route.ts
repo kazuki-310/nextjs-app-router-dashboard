@@ -1,4 +1,3 @@
-import { randomUUID } from 'node:crypto';
 import { db } from '@vercel/postgres';
 import bcrypt from 'bcrypt';
 import { customers, invoices, revenue, users } from '../_lib/placeholder-data';
@@ -6,9 +5,10 @@ import { customers, invoices, revenue, users } from '../_lib/placeholder-data';
 const client = await db.connect();
 
 async function seedUsers() {
+	await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 	await client.sql`
     CREATE TABLE IF NOT EXISTS users (
-      id UUID PRIMARY KEY,
+      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
       email TEXT NOT NULL UNIQUE,
       password TEXT NOT NULL
@@ -18,10 +18,9 @@ async function seedUsers() {
 	const insertedUsers = await Promise.all(
 		users.map(async (user) => {
 			const hashedPassword = await bcrypt.hash(user.password, 10);
-			const uuid = randomUUID();
 			return client.sql`
         INSERT INTO users (id, name, email, password)
-        VALUES (${uuid}, ${user.name}, ${user.email}, ${hashedPassword})
+        VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword})
         ON CONFLICT (id) DO NOTHING;
       `;
 		}),
@@ -31,9 +30,11 @@ async function seedUsers() {
 }
 
 async function seedInvoices() {
+	await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
 	await client.sql`
     CREATE TABLE IF NOT EXISTS invoices (
-      id UUID PRIMARY KEY,
+      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
       customer_id UUID NOT NULL,
       amount INT NOT NULL,
       status VARCHAR(255) NOT NULL,
@@ -42,24 +43,24 @@ async function seedInvoices() {
   `;
 
 	const insertedInvoices = await Promise.all(
-		invoices.map((invoice) => {
-			const uuid = randomUUID();
-			return client.sql`
-        INSERT INTO invoices (id, customer_id, amount, status, date)
-        VALUES (${uuid}, ${invoice.customer_id}, ${invoice.amount}, ${invoice.status}, ${invoice.date})
+		invoices.map(
+			(invoice) => client.sql`
+        INSERT INTO invoices (customer_id, amount, status, date)
+        VALUES (${invoice.customer_id}, ${invoice.amount}, ${invoice.status}, ${invoice.date})
         ON CONFLICT (id) DO NOTHING;
-      `;
-		}),
+      `,
+		),
 	);
 
 	return insertedInvoices;
 }
+
 async function seedCustomers() {
 	await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
 	await client.sql`
     CREATE TABLE IF NOT EXISTS customers (
-      id UUID PRIMARY KEY,
+      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
       email VARCHAR(255) NOT NULL,
       image_url VARCHAR(255) NOT NULL

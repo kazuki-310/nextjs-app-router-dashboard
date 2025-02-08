@@ -1,6 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["postgresqlExtensions"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -9,20 +8,23 @@ datasource db {
 }
 
 model customers {
-  id        String     @id @db.Uuid
-  name      String     @db.VarChar(255)
-  email     String     @db.VarChar(255)
-  image_url String     @db.VarChar(255)
-  invoices  invoices[]
+  id        String @id @default(uuid()) @db.Uuid
+  name      String @db.VarChar(255)
+  email     String @db.VarChar(255)
+  image_url String @db.VarChar(255)
+}
+
+enum InvoiceStatus {
+  paid
+  pending
 }
 
 model invoices {
-  id          String        @id @db.Uuid
+  id          String        @id @default(uuid()) @db.Uuid
   customer_id String        @db.Uuid
   amount      Int
   status      InvoiceStatus
   date        DateTime      @db.Date
-  customers   customers     @relation(fields: [customer_id], references: [id])
 }
 
 model revenue {
@@ -35,9 +37,4 @@ model users {
   name     String @db.VarChar(255)
   email    String @unique
   password String
-}
-
-enum InvoiceStatus {
-  paid
-  pending
 }

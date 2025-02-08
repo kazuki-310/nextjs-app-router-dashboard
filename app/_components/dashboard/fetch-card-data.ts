@@ -28,6 +28,7 @@ export async function fetchCardData() {
 				},
 			}),
 		]);
+		paidAggregate._sum.amount;
 
 		// 合計金額をフォーマット
 		const totalPaidInvoices = formatCurrency(paidAggregate._sum.amount ?? 0);
