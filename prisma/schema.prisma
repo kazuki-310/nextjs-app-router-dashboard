@@ -28,6 +28,9 @@ model invoices {
   date        DateTime      @db.Date
 
   customer customers @relation(fields: [customer_id], references: [id])
+
+  @@index([customer_id])
+  @@index([date])
 }
 
 model revenue {
