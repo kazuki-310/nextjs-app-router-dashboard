@@ -2,11 +2,11 @@ import { prisma } from '@/src/lib/prisma';
 
 export async function fetchInvoiceById(id: string) {
 	try {
-		const invoice = await prisma.invoices.findUnique({
+		const invoice = await prisma.invoice.findUnique({
 			where: { id },
 			select: {
 				id: true,
-				customer_id: true,
+				customerId: true,
 				amount: true,
 				status: true,
 			},

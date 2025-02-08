@@ -17,7 +17,7 @@ export function LatestInvoicesPresentation({ latestInvoices }: { latestInvoices:
 						>
 							<div className='flex items-center'>
 								<Image
-									src={invoice.image_url}
+									src={invoice.imageUrl}
 									alt={`${invoice.name}'s profile picture`}
 									className='mr-4 rounded-full'
 									width={32}

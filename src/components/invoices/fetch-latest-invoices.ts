@@ -3,7 +3,7 @@ import { formatCurrency } from '@/src/utils/formater';
 
 export async function fetchLatestInvoices() {
 	try {
-		const invoices = await prisma.invoices.findMany({
+		const invoices = await prisma.invoice.findMany({
 			orderBy: {
 				date: 'desc',
 			},
@@ -12,7 +12,7 @@ export async function fetchLatestInvoices() {
 					select: {
 						name: true,
 						email: true,
-						image_url: true,
+						imageUrl: true,
 					},
 				},
 			},
@@ -23,7 +23,7 @@ export async function fetchLatestInvoices() {
 			id: invoice.id,
 			name: invoice.customer?.email,
 			email: invoice.customer?.name,
-			image_url: invoice.customer?.image_url,
+			imageUrl: invoice.customer?.imageUrl,
 			amount: formatCurrency(invoice.amount),
 		}));
 		return latestInvoices;

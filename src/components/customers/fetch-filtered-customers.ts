@@ -3,7 +3,7 @@ import { formatCurrency } from '@/src/utils/formater';
 
 export async function fetchFilteredCustomers(query: string) {
 	try {
-		const customersData = await prisma.customers.findMany({
+		const customersData = await prisma.customer.findMany({
 			where: {
 				OR: [{ name: { contains: query, mode: 'insensitive' } }, { email: { contains: query, mode: 'insensitive' } }],
 			},
@@ -16,11 +16,11 @@ export async function fetchFilteredCustomers(query: string) {
 		});
 
 		const customers = customersData.map((customer) => {
-			const total_invoices = customer.invoices.length;
-			const total_pending = customer.invoices.reduce((sum, invoice) => {
+			const totalInvoices = customer.invoices.length;
+			const totalPending = customer.invoices.reduce((sum, invoice) => {
 				return invoice.status === 'pending' ? sum + invoice.amount : sum;
 			}, 0);
-			const total_paid = customer.invoices.reduce((sum, invoice) => {
+			const totalPaid = customer.invoices.reduce((sum, invoice) => {
 				return invoice.status === 'paid' ? sum + invoice.amount : sum;
 			}, 0);
 
@@ -28,10 +28,10 @@ export async function fetchFilteredCustomers(query: string) {
 				id: customer.id,
 				name: customer.name,
 				email: customer.email,
-				image_url: customer.image_url,
-				total_invoices,
-				total_pending: formatCurrency(total_pending),
-				total_paid: formatCurrency(total_paid),
+				imageUrl: customer.imageUrl,
+				totalInvoices,
+				totalPending: formatCurrency(totalPending),
+				totalPaid: formatCurrency(totalPaid),
 			};
 		});
 

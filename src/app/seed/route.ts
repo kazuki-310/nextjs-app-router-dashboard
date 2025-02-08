@@ -5,7 +5,7 @@ import { prisma } from '../../lib/prisma';
 
 async function main() {
 	// 1. users テーブルのシード
-	await prisma.users.createMany({
+	await prisma.user.createMany({
 		data: await Promise.all(
 			users.map(async (user) => ({
 				id: user.id,
@@ -18,22 +18,22 @@ async function main() {
 		skipDuplicates: true,
 	});
 
-	// 2. customers テーブルのシード
-	await prisma.customers.createMany({
+	// 2. customer テーブルのシード
+	await prisma.customer.createMany({
 		data: customers.map((customer) => ({
 			id: customer.id,
 			name: customer.name,
 			email: customer.email,
-			image_url: customer.image_url,
+			imageUrl: customer.imageUrl,
 		})),
 
 		skipDuplicates: true,
 	});
 
-	// 3. invoices テーブルのシード
-	await prisma.invoices.createMany({
+	// 3. invoice テーブルのシード
+	await prisma.invoice.createMany({
 		data: invoices.map((invoice) => ({
-			customer_id: invoice.customer_id,
+			customerId: invoice.customerId,
 			amount: invoice.amount,
 			status: invoice.status as InvoiceStatus,
 			date: invoice.date,

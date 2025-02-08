@@ -6,11 +6,11 @@ export async function fetchCardData() {
 		// 以下のように Promise.all を使って並列にクエリを走らせます
 		const [numberOfInvoices, numberOfCustomers, paidAggregate, pendingAggregate] = await Promise.all([
 			// 全インボイス数の取得
-			prisma.invoices.count(),
+			prisma.invoice.count(),
 			// 全顧客数の取得
-			prisma.customers.count(),
+			prisma.customer.count(),
 			// status='paid' のインボイス合計金額
-			prisma.invoices.aggregate({
+			prisma.invoice.aggregate({
 				_sum: {
 					amount: true,
 				},
@@ -19,7 +19,7 @@ export async function fetchCardData() {
 				},
 			}),
 			// status='pending' のインボイス合計金額
-			prisma.invoices.aggregate({
+			prisma.invoice.aggregate({
 				_sum: {
 					amount: true,
 				},

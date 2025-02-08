@@ -2,7 +2,7 @@ import { prisma } from '@/src/lib/prisma';
 
 export async function fetchCustomers() {
 	try {
-		const customers = await prisma.customers.findMany({
+		const customers = await prisma.customer.findMany({
 			select: {
 				id: true,
 				name: true,

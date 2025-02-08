@@ -4,10 +4,11 @@
     "build": "next build",
     "dev": "next dev --turbopack",
     "start": "next start",
-    "check": "biome check ./app/",
-    "check:fix": "biome check --write ./app/",
+    "check": "biome check ./src/",
+    "check:fix": "biome check --write ./src/",
     "prisma-migrate": "npx prisma migrate dev",
-    "prisma-generate": "npx prisma generate"
+    "prisma-generate": "npx prisma generate",
+    "prisma-reset": "npx prisma migrate reset"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

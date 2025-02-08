@@ -22,7 +22,7 @@ export function InvoiceFormPresentaion({
 	const initialState: State = { message: null, errors: {} };
 	const [state, formAction, isPending] = useActionState(onSubmitAction, initialState);
 
-	const defaultCustomerId = invoice?.customer_id ?? '';
+	const defaultCustomerId = invoice?.customerId ?? '';
 	const defaultAmount = invoice?.amount;
 	const defaultStatus = invoice?.status ?? 'pending';
 

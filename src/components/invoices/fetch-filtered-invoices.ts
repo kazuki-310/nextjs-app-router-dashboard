@@ -14,7 +14,7 @@ export async function fetchFilteredInvoices(query: string, currentPage: number) 
 				status: InvoiceStatusType;
 				name: string;
 				email: string;
-				image_url: string;
+				imageUrl: string;
 			}[]
 		>`
       SELECT
@@ -24,7 +24,7 @@ export async function fetchFilteredInvoices(query: string, currentPage: number) 
         i.status,
         c.name,
         c.email,
-        c.image_url
+        c.imageUrl
       FROM "invoices" AS i
       JOIN "customers" AS c
         ON i.customer_id = c.id

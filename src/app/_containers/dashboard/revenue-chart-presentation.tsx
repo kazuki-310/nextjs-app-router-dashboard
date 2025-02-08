@@ -1,8 +1,8 @@
 import { generateYAxis } from '@/src/utils/generate';
 import { CalendarIcon } from '@heroicons/react/24/outline';
-import type { revenue } from '@prisma/client';
+import type { Revenue } from '@prisma/client';
 
-export function RevenueChartPresentation({ revenue }: { revenue: revenue[] }) {
+export function RevenueChartPresentation({ revenue }: { revenue: Revenue[] }) {
 	const chartHeight = 350;
 
 	const { yAxisLabels, topLabel } = generateYAxis(revenue);
