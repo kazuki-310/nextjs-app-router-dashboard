@@ -28,7 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/constants/seed-data.ts",
+    "src/constants/seed-data.ts",
     "scripts/seed.js"
   ],
   "exclude": ["node_modules"]
