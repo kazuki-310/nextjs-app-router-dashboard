@@ -1,7 +1,8 @@
-import { CustomersTable } from '@/src/components/customers/table';
+import { Suspense } from 'react';
+
+import { CustomersTableContainer } from '@/src/app/_containers/dashboard/customers';
 import { Search } from '@/src/components/search';
 import { InvoicesTableSkeleton } from '@/src/components/skeletons';
-import { Suspense } from 'react';
 
 export default async function Page(props: {
 	searchParams?: Promise<{
@@ -20,7 +21,7 @@ export default async function Page(props: {
 
 			{/* NOTE: Suspense に key を渡すことで異なる場合再レンダリングさせる。 */}
 			<Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
-				<CustomersTable query={query} />
+				<CustomersTableContainer query={query} />
 			</Suspense>
 		</div>
 	);

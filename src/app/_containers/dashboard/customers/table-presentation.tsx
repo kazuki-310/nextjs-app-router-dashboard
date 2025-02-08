@@ -1,9 +1,7 @@
+import type { CustomersTableType } from '@/src/lib/definitions';
 import Image from 'next/image';
-import { fetchFilteredCustomers } from './fetch-filtered-customers';
 
-export async function CustomersTable({ query }: { query: string }) {
-	const customers = await fetchFilteredCustomers(query);
-
+export function CustomersTablePresentation({ customers }: { customers: CustomersTableType[] }) {
 	return (
 		<div className='mt-6 flow-root'>
 			<div className='overflow-x-auto'>

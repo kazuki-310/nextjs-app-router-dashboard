@@ -1,19 +1,11 @@
-import { formatDateToLocal } from '@/src/lib/utils';
-import { formatCurrency } from '@/src/utils/formater';
 import Image from 'next/image';
-import { DeleteInvoice, UpdateInvoice } from './buttons';
-import { fetchFilteredInvoices } from './fetch-filtered-invoices';
-import { Status } from './status';
 
-export async function InvoicesTable({
-	query,
-	currentPage,
-}: {
-	query: string;
-	currentPage: number;
-}) {
-	const invoices = await fetchFilteredInvoices(query, currentPage);
+import { DeleteInvoiceLink, UpdateInvoiceLink } from '@/src/components/invoices/buttons';
+import { Status } from '@/src/components/invoices/status';
+import type { InvoicesTable } from '@/src/lib/definitions';
+import { formatCurrency, formatDateToLocal } from '@/src/utils/formater';
 
+export function InvoicesTablePresentation({ invoices }: { invoices: InvoicesTable[] }) {
 	return (
 		<div className='mt-6 flow-root'>
 			<div className='inline-block min-w-full align-middle'>
@@ -35,6 +27,7 @@ export async function InvoicesTable({
 										</div>
 										<p className='text-sm text-gray-500'>{invoice.email}</p>
 									</div>
+
 									<Status status={invoice.status} />
 								</div>
 								<div className='flex w-full items-center justify-between pt-4'>
@@ -43,8 +36,8 @@ export async function InvoicesTable({
 										<p>{formatDateToLocal(invoice.date)}</p>
 									</div>
 									<div className='flex justify-end gap-2'>
-										<UpdateInvoice id={invoice.id} />
-										<DeleteInvoice id={invoice.id} />
+										<UpdateInvoiceLink id={invoice.id} />
+										<DeleteInvoiceLink id={invoice.id} />
 									</div>
 								</div>
 							</div>
@@ -101,8 +94,8 @@ export async function InvoicesTable({
 									</td>
 									<td className='whitespace-nowrap py-3 pl-6 pr-3'>
 										<div className='flex justify-end gap-3'>
-											<UpdateInvoice id={invoice.id} />
-											<DeleteInvoice id={invoice.id} />
+											<UpdateInvoiceLink id={invoice.id} />
+											<DeleteInvoiceLink id={invoice.id} />
 										</div>
 									</td>
 								</tr>

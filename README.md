@@ -74,7 +74,7 @@ app
 │  ├── layout.tsx
 │  ├── _containers
 │  │  ├── <Container Name>
-│  │  │  ├── index.tsx
+│  │  │  ├── index.tsx  // Container Componentsをexport
 │  │  │  ├── container.tsx
 │  │  │  ├── presentational.tsx
 │  │  │  └── ...

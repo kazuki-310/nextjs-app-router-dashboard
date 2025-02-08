@@ -1,11 +1,9 @@
-import { fetchCustomers } from '@/src/components/customers/fetch-customers';
+import { InvoiceFormContainer } from '@/src/app/_containers/dashboard/invoices';
 import { Breadcrumbs } from '@/src/components/invoices/breadcrumbs';
-import { Form } from '@/src/components/invoices/form';
 import { createInvoice } from '@/src/lib/invoice-form-action';
+import { Suspense } from 'react';
 
 export default async function Page() {
-	const customers = await fetchCustomers();
-
 	return (
 		<main>
 			<Breadcrumbs
@@ -19,7 +17,9 @@ export default async function Page() {
 				]}
 			/>
 
-			<Form mode='create' customers={customers} onSubmitAction={createInvoice} cancelHref='/dashboard/invoices' />
+			<Suspense fallback={'loading...'}>
+				<InvoiceFormContainer mode='create' onSubmitAction={createInvoice} cancelHref='/dashboard/invoices' />
+			</Suspense>
 		</main>
 	);
 }

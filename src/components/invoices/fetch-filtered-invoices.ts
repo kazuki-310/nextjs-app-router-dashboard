@@ -1,4 +1,5 @@
 import { ITEMS_PER_PAGE } from '@/src/constants/pagenation';
+import type { InvoiceStatusType } from '@/src/lib/definitions';
 import { prisma } from '@/src/lib/prisma';
 
 export async function fetchFilteredInvoices(query: string, currentPage: number) {
@@ -10,7 +11,7 @@ export async function fetchFilteredInvoices(query: string, currentPage: number) 
 				id: string;
 				amount: number;
 				date: Date;
-				status: string;
+				status: InvoiceStatusType;
 				name: string;
 				email: string;
 				image_url: string;

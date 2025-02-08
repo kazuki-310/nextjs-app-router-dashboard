@@ -1,21 +1,24 @@
 'use client';
 
-import type { CustomerField, InvoiceForm, InvoiceStatusType } from '@/src/lib/definitions';
+import { Button } from '@/src/components/button';
+import type { CustomerField, InvoiceStatusType } from '@/src/lib/definitions';
 import type { State } from '@/src/lib/invoice-form-action';
 import { CheckIcon, ClockIcon, CurrencyDollarIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useActionState } from 'react';
-import { Button } from '../button';
+import type { FormContainerProps } from './form-container';
 
-type FormProps = {
-	mode: 'create' | 'edit';
-	invoice?: InvoiceForm;
+export type InvoiceFormPresentaion = FormContainerProps & {
 	customers: CustomerField[];
-	onSubmitAction: (state: State, formData: FormData) => Promise<State>;
-	cancelHref: string;
 };
 
-export function Form({ mode, invoice, customers, onSubmitAction, cancelHref }: FormProps) {
+export function InvoiceFormPresentaion({
+	mode,
+	invoice,
+	onSubmitAction,
+	cancelHref,
+	customers,
+}: InvoiceFormPresentaion) {
 	const initialState: State = { message: null, errors: {} };
 	const [state, formAction, isPending] = useActionState(onSubmitAction, initialState);
 
