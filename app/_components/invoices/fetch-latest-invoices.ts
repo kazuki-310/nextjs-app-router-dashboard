@@ -30,7 +30,5 @@ export async function fetchLatestInvoices() {
 	} catch (error) {
 		console.error('Database Error:', error);
 		throw new Error('Failed to fetch the latest invoices.');
-	} finally {
-		await prisma.$disconnect();
 	}
 }
