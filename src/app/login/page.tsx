@@ -1,5 +1,6 @@
 import AcmeLogo from '@/src/components/acme-logo';
 import LoginForm from '@/src/components/login-form';
+import { Suspense } from 'react';
 
 export default function LoginPage() {
 	return (
@@ -11,7 +12,9 @@ export default function LoginPage() {
 					</div>
 				</div>
 
-				<LoginForm />
+				<Suspense fallback='Loading...'>
+					<LoginForm />
+				</Suspense>
 			</div>
 		</main>
 	);
