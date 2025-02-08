@@ -1,6 +1,5 @@
 import { prisma } from '@/app/_lib/prisma';
 import { ITEMS_PER_PAGE } from '@/app/constants/pagenation';
-import type { InvoiceStatus } from '@prisma/client';
 
 export async function fetchInvoicesPages(query: string) {
 	try {

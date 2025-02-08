@@ -1,12 +1,5 @@
 import type { Revenue } from './definitions';
 
-export const formatCurrency = (amount: number) => {
-	return (amount / 100).toLocaleString('en-US', {
-		style: 'currency',
-		currency: 'USD',
-	});
-};
-
 export const formatDateToLocal = (date: Date, locale = 'en-US') => {
 	// const date = new Date(dateStr);
 	const options: Intl.DateTimeFormatOptions = {

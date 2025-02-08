@@ -1,7 +1,7 @@
 import { CreateInvoice } from '@/app/_components/invoices/buttons';
 import { fetchInvoicesPages } from '@/app/_components/invoices/fetch-invoice-pages';
-import InvoicesTable from '@/app/_components/invoices/invoice-table';
 import Pagination from '@/app/_components/invoices/pagination';
+import { InvoicesTable } from '@/app/_components/invoices/table';
 import { Search } from '@/app/_components/search';
 import { InvoicesTableSkeleton } from '@/app/_components/skeletons';
 import type { Metadata } from 'next';
