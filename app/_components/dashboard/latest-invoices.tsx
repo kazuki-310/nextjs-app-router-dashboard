@@ -1,7 +1,7 @@
-import { fetchLatestInvoices } from '@/app/_lib/data';
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Image from 'next/image';
+import { fetchLatestInvoices } from '../invoices/fetch-latest-invoices';
 
 export default async function LatestInvoices() {
 	const latestInvoices = await fetchLatestInvoices();

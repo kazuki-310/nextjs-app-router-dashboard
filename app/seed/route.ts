@@ -1,7 +1,7 @@
 import type { InvoiceStatus } from '@prisma/client';
 import bcrypt from 'bcrypt';
-import { customers, invoices, revenue, users } from '../_lib/placeholder-data';
 import { prisma } from '../_lib/prisma';
+import { customers, invoices, revenue, users } from '../constants/seed-data';
 
 async function main() {
 	// 1. users テーブルのシード

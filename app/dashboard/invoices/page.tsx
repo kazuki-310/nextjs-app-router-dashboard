@@ -1,9 +1,9 @@
 import { CreateInvoice } from '@/app/_components/invoices/buttons';
+import { fetchInvoicesPages } from '@/app/_components/invoices/fetch-invoice-pages';
 import InvoicesTable from '@/app/_components/invoices/invoice-table';
 import Pagination from '@/app/_components/invoices/pagination';
 import { Search } from '@/app/_components/search';
 import { InvoicesTableSkeleton } from '@/app/_components/skeletons';
-import { fetchInvoicesPages } from '@/app/_lib/data';
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 

@@ -1,6 +1,7 @@
+import { fetchCustomers } from '@/app/_components/customers/fetch-customers';
 import { Breadcrumbs } from '@/app/_components/invoices/breadcrumbs';
+import { fetchInvoiceById } from '@/app/_components/invoices/fetch-invoice-by-id';
 import { Form } from '@/app/_components/invoices/form';
-import { fetchCustomers, fetchInvoiceById } from '@/app/_lib/data';
 import { updateInvoice } from '@/app/_lib/invoice-form-action';
 import { notFound } from 'next/navigation';
 
