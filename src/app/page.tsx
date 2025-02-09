@@ -1,3 +1,10 @@
+import Link from 'next/link';
+
 export default function Page() {
-	return <div className='text-2xl font-bold text-red-800'>test</div>;
+	return (
+		<div>
+			<h1>Home</h1>
+			<Link href='/dashboard'>Dashboard</Link>
+		</div>
+	);
 }
