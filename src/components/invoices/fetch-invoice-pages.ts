@@ -1,21 +1,22 @@
 import { ITEMS_PER_PAGE } from '@/src/constants/pagenation';
 import { prisma } from '@/src/lib/prisma';
 
-export async function fetchInvoicesPages(query: string) {
-	try {
-		const result = await prisma.$queryRaw<{ count: bigint }[]>`
-      SELECT COUNT(*) as count
-      FROM "invoices"
-      JOIN "customers" ON "invoices"."customer_id" = "customers"."id"
-      WHERE
-        "customers"."name" ILIKE ${`%${query}%`}
-        OR "customers"."email" ILIKE ${`%${query}%`}
-        OR "invoices"."amount"::text ILIKE ${`%${query}%`}
-        OR "invoices"."date"::text ILIKE ${`%${query}%`}
-        OR "invoices"."status"::text ILIKE ${`%${query}%`}
-    `;
+import type { Prisma } from '@prisma/client';
 
-		const totalCount = Number(result[0].count);
+export async function fetchInvoicesPages(query: string) {
+	const orConditions: Prisma.InvoiceWhereInput[] = [
+		{ customer: { name: { contains: query, mode: 'insensitive' } } },
+		{ customer: { email: { contains: query, mode: 'insensitive' } } },
+	];
+
+	try {
+		const totalCount = await prisma.invoice.count({
+			where: {
+				OR: orConditions,
+			},
+			orderBy: { date: 'desc' },
+		});
+
 		const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
 
 		return totalPages;
